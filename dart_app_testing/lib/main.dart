@@ -2,7 +2,7 @@ import 'dart:io';
 
 class Question {
   String question;
-  String answer;
+  double answer;
   Question({
     required this.question,
     required this.answer,
@@ -10,17 +10,27 @@ class Question {
 }
 
 double getans(String msg) {
-  print('Q// $msg');
-  var answer = double.parse(stdin.readLineSync()!);
+  print('Question is // $msg');
+  var answer = double.tryParse(stdin.readLineSync()!) ?? 0.0;
   return answer;
 }
 
 void main() {
   var Questions = [
-    Question(question: '3+4', answer: '7'),
-    Question(question: '8*100', answer: '800'),
-    Question(question: '8-4', answer: '4'),
+    Question(question: '3+4', answer: 7),
+    Question(question: '8*100', answer: 800),
+    Question(question: '8-4', answer: 4),
   ];
-  var UserAnswer = getans(Questions[0].question);
-  print('anwer is = $UserAnswer');
+
+  for (var item in Questions) {
+    var UserAnswer = getans(item.question);
+    print('anwer is = $UserAnswer');
+    if (UserAnswer == item.answer) {
+      print("Correct!");
+    } else {
+      print("Incorrect , The Correct answer is ${item.answer}");
+    }
+    print("-------------");
+  }
+  print("Thank You!.\nGood Bye!!7");
 }
